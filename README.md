@@ -19,10 +19,10 @@ A Game Engine Built while Learning
 
 Open this folder in Visual Studio with CMake support, select the `x64-debug` preset, and build `Vanilla`. The HLSL shader files are copied beside the executable automatically.
 
-Tool Needed To Run This Code In Visual Studio
-1.Desktop Developement with C/C++
-2.HLSL Tools
-3.your PC's GPU must be supporting DirectX11
+## Tool Needed To Run This Code In Visual Studio
+1. Desktop Developement with C/C++
+2. HLSL Tools
+3. your PC's GPU must be supporting DirectX11
 
 
 ❌DONT RUN THE ENGINE YET.THIS IS A FORK AND IT IS UNDER REFACTORING,YOU CAN JUST HAVE A LOOK AT THE CODE BUT DONT RUN IT!
