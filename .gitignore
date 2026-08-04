@@ -1,0 +1,14 @@
+# Visual Studio temporary files
+.vs/
+out/
+build/
+*.user
+*.sln
+*.vcxproj
+*.filters
+
+# Compiled binaries
+*.exe
+*.dll
+*.lib
+*.obj
