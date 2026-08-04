@@ -1,22 +1,27 @@
 # Vanilla Engine
 
-A small DirectX 11 learning engine written in C++.
+A Game Engine Built while Learning
 
-Current milestone: a rotating, textured cube with a GLFW window, depth testing, a movable camera (`WASD`, `Space`, `Left Shift`), and an ImGui dashboard.
+Current milestone:
+1.Viewing around the world made by Vector and Matrix math from the DirectX11 Math Library.
+2.WASD Movements for moving around the World.
+3.Asset manager(3D Models,Textures e.t.c).
+4.An interactive User Interface for the Engine using dear imgui library.
 
 ## Layout
 
 - `Core/` — application lifetime and platform window code.
-- `Engine/` — graphics device, renderer, camera, shader/mesh data, and textures.
-- `Sandbox/` — executable entry point; use it for experiments without cluttering engine code.
+- `Sandbox/` — other executable entry point; use it for experiments without cluttering engine code.
 - `Core/Vendor/` — third-party code (GLFW and Dear ImGui).
 
 ## Build
 
 Open this folder in Visual Studio with CMake support, select the `x64-debug` preset, and build `Vanilla`. The HLSL shader files are copied beside the executable automatically.
 
-## Good next steps
+Tool Needed To Run This Code In Visual Studio
+1.Desktop Developement with C/C++
+2.HLSL Tools
+3.your PC's GPU must be supporting DirectX11
 
-1. Replace the procedural 2×2 texture in `Engine/Texture.cpp` with a PNG loader.
-2. Add resize handling to recreate DirectX render targets.
-3. Extract keyboard input from `Renderer` into `Core/Input`.
+
+❌DONT RUN THE ENGINE YET.THIS IS A FORK AND IT IS UNDER REFACTORING,YOU CAN JUST HAVE A LOOK AT THE CODE BUT DONT RUN IT!
