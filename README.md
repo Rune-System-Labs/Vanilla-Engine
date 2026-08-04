@@ -3,8 +3,8 @@
 A Game Engine Built while Learning
 
 Current milestone:
-1.Viewing around the world made by Vector and Matrix math from the DirectX11 Math Library.
 
+1.Viewing around the world made by Vector and Matrix math from the DirectX11 Math Library.
 2.WASD Movements for moving around the World.
 3.Asset manager(3D Models,Textures e.t.c).
 4.An interactive User Interface for the Engine using dear imgui library.
