@@ -1,8 +1,9 @@
-#include "vertexshader.h"
+#include "VertexShader.h"
 #include <fstream>
 #include <iostream>
 #include <string_view>
 #include <vector>
+#include "PixelShader.h"
 
 namespace vl::Core {
 	VertexShader::VertexShader(){
@@ -12,6 +13,7 @@ namespace vl::Core {
 	VertexShader::~VertexShader()
 	{
 	}
+
 
 	void VertexShader::CompileVertexShader(std::string_view filePath, const char* entryPoint, const char* shaderModel) {
 		std::ifstream shaderFile(filePath.data());

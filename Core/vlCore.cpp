@@ -5,19 +5,18 @@ namespace vl {
 	Core::Core()
 	{
 	}
-	void Core::VlInitialize() {
+	void Core::VlInitialize(vl::Platform::Window& window) {
 		device_ = ComPtr<ID3D11Device>();
 		context_ = ComPtr<ID3D11DeviceContext>();
 		swapChain_ = ComPtr<IDXGISwapChain>();
 		renderTargetView_ = ComPtr<ID3D11RenderTargetView>();
-		window_ = std::make_unique<vl::Platform::Window>();
 
-		HWND hwnd = glfwGetWin32Window(window_->GetHandle());
+		HWND hwnd = glfwGetWin32Window(window.GetHandle());
 
 		DXGI_SWAP_CHAIN_DESC scd = {};
 		scd.BufferCount = 1;
-		scd.BufferDesc.Width = window_->Width();
-		scd.BufferDesc.Height = window_->Height();
+		scd.BufferDesc.Width = window.Width();
+		scd.BufferDesc.Height = window.Height();
 		scd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		scd.SampleDesc.Count = 1;
 		scd.Windowed = TRUE;
@@ -41,17 +40,16 @@ namespace vl {
 			context_.GetAddressOf()
 		);
 
-		std::unique_ptr<ID3D11Texture2D>backBuffer = std::make_unique<ID3D11Texture2D>();
+		ComPtr<ID3D11Texture2D>backBuffer = ComPtr<ID3D11Texture2D>();
 		HRESULT hr = swapChain_->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
 
 		if (backBuffer) {
-			hr = device_->CreateRenderTargetView(backBuffer.get(), nullptr, renderTargetView_.GetAddressOf());
+			hr = device_->CreateRenderTargetView(backBuffer.Get(), nullptr, renderTargetView_.GetAddressOf());
 			if (FAILED(hr)) {
 				std::cerr << "VL::Could not create RTV!" << hr << std::endl;
 				return;
 			}
 		}
-		if (backBuffer) backBuffer->Release();
 
 		context_->OMSetRenderTargets(
 			1,

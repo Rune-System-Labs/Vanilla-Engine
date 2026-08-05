@@ -5,6 +5,7 @@
 namespace vl::Platform {
 class Window;
 }
+
 namespace vl {
 class Core;
 }
@@ -12,6 +13,8 @@ class Core;
 namespace vl::App {
 class Application{
 public:
+    Application();
+    ~Application();
     int Run();
 private:
     std::unique_ptr<vl::Platform::Window> window_;

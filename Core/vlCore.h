@@ -16,13 +16,12 @@ namespace vl {
 	public:
 		Core();
 		~Core();
-		void VlInitialize();
+		void VlInitialize(vl::Platform::Window& window);
 	private:
 		ComPtr<ID3D11Device> device_;
 		ComPtr<ID3D11DeviceContext> context_;
 		ComPtr<IDXGISwapChain> swapChain_;
 		ComPtr<ID3D11RenderTargetView> renderTargetView_;
-		std::unique_ptr<vl::Platform::Window> window_;
 		HRESULT hr = S_OK;
 	};
 }

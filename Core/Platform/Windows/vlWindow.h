@@ -2,11 +2,9 @@
 
 #include <cstdint>
 #include <string_view>
-
-#define GLFW_EXPOSE_NATIVE_WIN32
-#define GLFW_NO_API
-
 #include <GLFW/glfw3.h>
+#define GLFW_EXPOSE_NATIVE_WIN32
+#define GLFW_API_NONE
 #include <GLFW/glfw3native.h>
 
 namespace vl::Platform {

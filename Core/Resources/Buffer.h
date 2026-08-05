@@ -19,6 +19,7 @@ template<typename T>
 void vlGenBuffers(D3D11_USAGE Usage,std::span<T>& data,UINT bindFlags, ComPtr<ID3D11Buffer>& buffers);
 private:
 ComPtr<ID3D11Device> device;
+HRESULT hr = S_OK;
 };
 template<typename T>
 inline void vl::Resource::Buffer::vlGenBuffers(D3D11_USAGE Usage, std::span<T>& data, UINT bindFlags, ComPtr<ID3D11Buffer>& buffers){

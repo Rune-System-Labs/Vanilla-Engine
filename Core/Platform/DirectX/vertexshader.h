@@ -7,10 +7,6 @@
 #include <d3dcompiler.h>
 using Microsoft::WRL::ComPtr;
 
-namespace vl::Resource {
-	class Buffer;
-}
-
 namespace vl::Core {
 	class VertexShader {
 	public:
@@ -27,7 +23,6 @@ namespace vl::Core {
 		ComPtr<ID3DBlob> VertexShaderByteCode = nullptr;
 		ComPtr<ID3DBlob> errorBlob = nullptr;
 		ComPtr<ID3D11InputLayout> inputLayout = nullptr;
-		std::unique_ptr<vl::Resource::Buffer> buffer;
 		ComPtr<ID3D11Device> device;
 	};
 }

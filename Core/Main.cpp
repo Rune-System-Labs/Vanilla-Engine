@@ -1,6 +1,6 @@
 #include "Core/Application.h"
 
 int main() {
-    vl::Core::Application application;
+    vl::App::Application application;
     return application.Run();
 }
