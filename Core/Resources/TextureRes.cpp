@@ -1,6 +1,6 @@
 #include "TextureRes.h"
 
-namespace vl::Resources {
+namespace vl::Resource {
 	ComPtr<ID3D11ShaderResourceView> Texture::vlLoadDDS(ComPtr<ID3D11ShaderResourceView>& srv, ComPtr<ID3D11Device>& device, const wchar_t* filename_) {
 		DirectX::ScratchImage image = {};
 		DirectX::TexMetadata metadata = {};

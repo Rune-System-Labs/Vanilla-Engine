@@ -8,7 +8,7 @@
 #include <string_view>
 using namespace Microsoft::WRL;
 
-namespace vl::Resources {
+namespace vl::Resource {
     class Texture{
     public:
         template<typename T>

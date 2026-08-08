@@ -9,11 +9,12 @@
 #include <string>
 using namespace Microsoft::WRL;
 
-namespace vl::Core {
+namespace vl::core::Shaders {
 	class PixelShader {
 	public:		
 	PixelShader();
 	~PixelShader();
+	void vlInitPShader();
 	void CompilePixelShader(std::string_view filePath, const char* entryPoint, const char* shaderModel);
 	void InitInstance(ComPtr<ID3D11Device>deviceInstance);
 	private:

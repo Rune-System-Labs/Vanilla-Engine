@@ -16,13 +16,13 @@ std::cout << "VL::Buffer resources released!" << std::endl;
 }
 void InitDevice(ComPtr<ID3D11Device> deviceInstance);
 template<typename T>
-void vlGenBuffers(D3D11_USAGE Usage,std::span<T>& data,UINT bindFlags, ComPtr<ID3D11Buffer>& buffers);
+void vlGenBuffers(D3D11_USAGE Usage,std::span<T> data,UINT bindFlags, ComPtr<ID3D11Buffer>& buffers);
 private:
 ComPtr<ID3D11Device> device;
 HRESULT hr = S_OK;
 };
 template<typename T>
-inline void vl::Resource::Buffer::vlGenBuffers(D3D11_USAGE Usage, std::span<T>& data, UINT bindFlags, ComPtr<ID3D11Buffer>& buffers){
+inline void vl::Resource::Buffer::vlGenBuffers(D3D11_USAGE Usage, std::span<T> data, UINT bindFlags, ComPtr<ID3D11Buffer>& buffers){
 		D3D11_BUFFER_DESC bufferDesc = {};
 		bufferDesc.Usage = Usage;
 		bufferDesc.ByteWidth = static_cast<UINT>(data.size() * sizeof(T));

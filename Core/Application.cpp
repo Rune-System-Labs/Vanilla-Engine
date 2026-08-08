@@ -2,6 +2,8 @@
 #include "Platform/Windows/vlWindow.h"
 #include "Platform/Windows/vlRenderer.h"
 #include "Platform/Windows/vlUserInterface.h"
+#include "Platform/DirectX/VertexShader.h"
+#include "Platform/DirectX/PixelShader.h"
 #include "vlCore.h"
 #include <iostream>
 #include <algorithm>
@@ -20,6 +22,14 @@ int vl::App::Application::Run() {
     core_->VlInitialize(*window_);
 	renderer_ = std::make_unique<vl::Platform::Renderer>();
 	userInterface_ = std::make_unique<vl::UI::UserInterface>();
+	vertexShader_ = std::make_unique<vl::core::Shaders::VertexShader>();
+	pixelShader_ = std::make_unique<vl::core::Shaders::PixelShader>();
+
+	vertexShader_->InitInstance(core_->GetDevice());
+	vertexShader_->vlInitVShader();
+
+	pixelShader_->InitInstance(core_->GetDevice());
+	pixelShader_->vlInitPShader();
 
 	userInterface_->vlInitUI(window_->GetHandle(), core_->GetDevice(), core_->GetContext());
     userInterface_->RegisterSettingsCallback(std::bind(&vl::Platform::Renderer::vlGenRenderState, renderer_.get()));
@@ -27,7 +37,7 @@ int vl::App::Application::Run() {
 	renderer_->InitRenderer(core_->GetDevice(), core_->GetRenderTargetView(), core_->GetContext(), core_->GetSwapChain());
 	renderer_->vlViewport(width, height);
 
-	   while (!glfwWindowShouldClose(window_->GetHandle())) {
+	while (!glfwWindowShouldClose(window_->GetHandle())) {
        glfwPollEvents();
        
 	   renderer_->ClearScreen();

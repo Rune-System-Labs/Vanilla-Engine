@@ -7,11 +7,12 @@
 #include <d3dcompiler.h>
 using Microsoft::WRL::ComPtr;
 
-namespace vl::Core {
+namespace vl::core::Shaders {
 	class VertexShader {
 	public:
 		VertexShader();
 		~VertexShader();
+		void vlInitVShader();
 		void CompileVertexShader(std::string_view filePath, const char* entryPoint, const char* shaderModel);
 		void InitInstance(ComPtr<ID3D11Device>deviceInstance);
 		[[nodiscard]] ID3D11VertexShader* GetVertexShader() const { return vertexShader.Get(); }

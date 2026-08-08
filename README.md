@@ -2,13 +2,6 @@
 
 A Game Engine Built while Learning
 
-## Current milestone:
-
-1. Viewing around the world made by Vector and Matrix math from the DirectX11 Math Library
-2. WASD Movements for moving around the World.
-3. Asset manager(3D Models,Textures e.t.c).
-4. An interactive User Interface for the Engine using dear imgui library.
-
 ## Layout
 
 - `Core/` — application lifetime and platform window code.
@@ -35,4 +28,10 @@ Open this folder in Visual Studio with CMake support, select the `x64-debug` pre
 - Fixed the settings callback flow so registered callbacks are invoked inside the selected category.
 - Fixed DirectX render-state creation and binding after the callback changes the selected mode.
 - Fixed ImGui `Begin`/`End` pairing. Every successful or unsuccessful `Begin` call must have a matching `End` call.
-- Rebuilt and verified the `x64-debug` target successfully.
+
+### 2026-08-08
+
+- Added automatic CMake discovery and copying for `.hlsl` and `.hlsli` files under `Core/Shaders`.
+- Added shader initialization helpers for the vertex and pixel shader classes.
+- Updated shader classes to use the `vl::core::Shaders` namespace Because of namespace conflicts with `vl::Core`
+- Connected shader initialization to the application startup flow.

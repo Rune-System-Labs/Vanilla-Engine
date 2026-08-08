@@ -1,8 +1,12 @@
 #include "PixelShader.h"
 
-namespace vl::Core {
+namespace vl::core::Shaders {
 	PixelShader::PixelShader(){
 
+	}
+
+	void PixelShader::vlInitPShader(){
+		CompilePixelShader("Core/Shaders/PixelShader.hlsl", "PSMain", "ps_5_0");
 	}
 
 	void PixelShader::CompilePixelShader(std::string_view filePath, const char* entryPoint, const char* shaderModel){

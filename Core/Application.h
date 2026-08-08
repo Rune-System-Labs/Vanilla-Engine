@@ -11,6 +11,11 @@ namespace vl {
 class Core;
 }
 
+namespace vl::core::Shaders {
+	class VertexShader;
+	class PixelShader;
+}
+
 namespace vl::UI {
 class UserInterface;
 }
@@ -22,10 +27,12 @@ public:
     ~Application();
     int Run();
 private:
-    std::unique_ptr<vl::Platform::Window> window_;
+	std::unique_ptr<vl::Platform::Window> window_;
 	std::unique_ptr<vl::Core> core_;
     std::unique_ptr<vl::Platform::Renderer> renderer_;
 	std::unique_ptr<vl::UI::UserInterface> userInterface_;
+	std::unique_ptr<vl::core::Shaders::VertexShader> vertexShader_;
+	std::unique_ptr<vl::core::Shaders::PixelShader> pixelShader_;
 };
 }
 

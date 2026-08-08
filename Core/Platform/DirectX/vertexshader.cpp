@@ -5,13 +5,17 @@
 #include <vector>
 #include "PixelShader.h"
 
-namespace vl::Core {
+namespace vl::core::Shaders {
 	VertexShader::VertexShader(){
 
 	}
 
 	VertexShader::~VertexShader()
 	{
+	}
+
+	void VertexShader::vlInitVShader(){
+		CompileVertexShader("Core/Shaders/VertexShader.hlsl", "VSMain", "vs_5_0");
 	}
 
 
