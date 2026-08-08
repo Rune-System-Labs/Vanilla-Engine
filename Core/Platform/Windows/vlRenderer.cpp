@@ -20,25 +20,14 @@ void Renderer::vlGenRenderState(){
 	rasterizerDesc.FrontCounterClockwise = FALSE;
 	rasterizerDesc.DepthBias = 0;
 
-	if (ImGui::BeginMenu("Settings")) {
-		if (ImGui::BeginMenu("Render States")) {
-			ImGui::Text("Renders in solid mode:");
-			ImGui::RadioButton("Solid", &Options, RenderStateOptions::Solid);
-			ImGui::Text("Renders in wireframe mode:");
-			ImGui::RadioButton("Wireframe", &Options, RenderStateOptions::Wireframe);
-			ImGui::EndMenu();
-		}
-		ImGui::EndMenu();
+	ImGui::Text("Rendering mode");
+	ImGui::RadioButton("Solid", &Options, RenderStateOptions::Solid);
+	ImGui::RadioButton("Wireframe", &Options, RenderStateOptions::Wireframe);
+	if (Options == RenderStateOptions::Solid){
+		rasterizerDesc.FillMode = D3D11_FILL_SOLID;
 	}
-	bool open = true;
-	if (ImGui::Begin("Render State Modifier",&open,ImGuiWindowFlags_NoResize)) {
-		if(Options == RenderStateOptions::Solid){
-			rasterizerDesc.FillMode = D3D11_FILL_SOLID;
-		}
-		else if(Options == RenderStateOptions::Wireframe){
-			rasterizerDesc.FillMode = D3D11_FILL_WIREFRAME;
-		}
-		ImGui::End();
+	else if (Options == RenderStateOptions::Wireframe){
+		rasterizerDesc.FillMode = D3D11_FILL_WIREFRAME;
 	}
 }
 
@@ -52,7 +41,9 @@ void Renderer::ClearScreen(){
 }
 
 void Renderer::vlStageRenderer(){
-	device->CreateRasterizerState(&rasterizerDesc, rasterizerState.GetAddressOf());
+	if (SUCCEEDED(device->CreateRasterizerState(&rasterizerDesc, rasterizerState.GetAddressOf()))) {
+		context->RSSetState(rasterizerState.Get());
+	}
 }
 
 Renderer::~Renderer(){

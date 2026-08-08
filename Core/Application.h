@@ -11,6 +11,10 @@ namespace vl {
 class Core;
 }
 
+namespace vl::UI {
+class UserInterface;
+}
+
 namespace vl::App {
 class Application{
 public:
@@ -20,7 +24,8 @@ public:
 private:
     std::unique_ptr<vl::Platform::Window> window_;
 	std::unique_ptr<vl::Core> core_;
-	std::unique_ptr<vl::Platform::Renderer> renderer_;
+    std::unique_ptr<vl::Platform::Renderer> renderer_;
+	std::unique_ptr<vl::UI::UserInterface> userInterface_;
 };
 }
 

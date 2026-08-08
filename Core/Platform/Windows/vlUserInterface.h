@@ -19,13 +19,15 @@ namespace vl::UI {
 		UserInterface() = default;
 		~UserInterface();
 		using SettingsCallback = std::function<void()>;
-		void vlInitUI(std::unique_ptr<GLFWwindow>&window, ComPtr<ID3D11Device>& device, ComPtr<ID3D11DeviceContext>&context);
+		void vlInitUI(GLFWwindow* window, ComPtr<ID3D11Device> device, ComPtr<ID3D11DeviceContext> context);
 		void vlStageUI();
 		void RegisterSettingsCallback(SettingsCallback callback);
 		void vlRenderUI();
 	private:
 		void vlSyncSettingsCallback();
 		std::vector<SettingsCallback> settingsCallbacks_;
+		bool settingsOpen_ = false;
+		int selectedSettingsPage_ = 0;
 	};
 }
 

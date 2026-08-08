@@ -1,8 +1,10 @@
 #include "Application.h"
 #include "Platform/Windows/vlWindow.h"
 #include "Platform/Windows/vlRenderer.h"
+#include "Platform/Windows/vlUserInterface.h"
 #include "vlCore.h"
 #include <iostream>
+#include <algorithm>
 
 vl::App::Application::Application() = default;
 vl::App::Application::~Application() = default;
@@ -17,14 +19,21 @@ int vl::App::Application::Run() {
     core_ = std::make_unique<vl::Core>();
     core_->VlInitialize(*window_);
 	renderer_ = std::make_unique<vl::Platform::Renderer>();
+	userInterface_ = std::make_unique<vl::UI::UserInterface>();
+
+	userInterface_->vlInitUI(window_->GetHandle(), core_->GetDevice(), core_->GetContext());
+    userInterface_->RegisterSettingsCallback(std::bind(&vl::Platform::Renderer::vlGenRenderState, renderer_.get()));
 
 	renderer_->InitRenderer(core_->GetDevice(), core_->GetRenderTargetView(), core_->GetContext(), core_->GetSwapChain());
 	renderer_->vlViewport(width, height);
 
-   while (!glfwWindowShouldClose(window_->GetHandle())) {
+	   while (!glfwWindowShouldClose(window_->GetHandle())) {
        glfwPollEvents();
        
 	   renderer_->ClearScreen();
+	   userInterface_->vlStageUI();
+	   renderer_->vlStageRenderer();
+	   userInterface_->vlRenderUI();
 
 	   renderer_->Present();
     }

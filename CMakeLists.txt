@@ -18,13 +18,22 @@ add_subdirectory(Core/Vendor/glfw)
 
 set(IMGUI_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Core/Vendor/imgui")
 set(ENGINE_SOURCES
-    Core/Application.cpp
-    Core/Platform/Windows/vlWindow.cpp
-    Core/Resources/Buffer.h
-    Core/Resources/Buffer.cpp
-    Core/Platform/Windows/vlRenderer.cpp
-    UI.cpp
     "Core/Main.cpp"
+    "Core/Application.cpp"
+    "Core/Platform/Windows/vlWindow.cpp"
+    "Core/Resources/Buffer.h"
+    "Core/Resources/Buffer.cpp"
+    "Core/Platform/Windows/vlRenderer.cpp"
+     "Core/vlCore.h"
+     "Core/vlCore.cpp"
+     "Core/Platform/DirectX/VertexShader.cpp"
+     "Core/Platform/DirectX/VertexShader.h"
+     "Core/Platform/Windows/vlUserInterface.cpp"
+     "Core/Platform/Windows/vlUserInterface.h"
+     "Core/Platform/DirectX/PixelShader.h"
+     "Core/Platform/DirectX/PixelShader.cpp"
+     "Core/Resources/TextureRes.cpp"
+     "Core/Resources/TextureRes.h"
 )
 set(IMGUI_SOURCES
     ${IMGUI_DIR}/imgui.cpp
@@ -32,8 +41,7 @@ set(IMGUI_SOURCES
     ${IMGUI_DIR}/imgui_tables.cpp
     ${IMGUI_DIR}/imgui_widgets.cpp
     ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp
-    ${IMGUI_DIR}/backends/imgui_impl_dx11.cpp
- "Core/vlCore.h" "Core/vlCore.cpp" "Core/Platform/DirectX/VertexShader.cpp" "Core/Platform/DirectX/VertexShader.h" "Core/Platform/Windows/vlUserInterface.cpp" "Core/Platform/Windows/vlUserInterface.h" "Core/Platform/DirectX/PixelShader.h" "Core/Platform/DirectX/PixelShader.cpp" "Core/Resources/TextureRes.cpp" "Core/Resources/TextureRes.h")
+    ${IMGUI_DIR}/backends/imgui_impl_dx11.cpp)
 
 add_executable(Vanilla ${ENGINE_SOURCES} ${IMGUI_SOURCES})
 target_include_directories(Vanilla PRIVATE
@@ -41,12 +49,5 @@ target_include_directories(Vanilla PRIVATE
     ${IMGUI_DIR}
     ${IMGUI_DIR}/backends
 )
-target_link_libraries(Vanilla PRIVATE glfw DirectXTex d3d11 d3dcompiler dxgi gdi32)
 
-# Shaders are compiled at startup, so copy them beside the program.
-add_custom_command(TARGET Vanilla POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${CMAKE_CURRENT_SOURCE_DIR}/VS.hlsl" "$<TARGET_FILE_DIR:Vanilla>/VS.hlsl"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${CMAKE_CURRENT_SOURCE_DIR}/PS.hlsl" "$<TARGET_FILE_DIR:Vanilla>/PS.hlsl"
-)
+target_link_libraries(Vanilla PRIVATE glfw DirectXTex d3d11 d3dcompiler dxgi gdi32)
