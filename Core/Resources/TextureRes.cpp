@@ -7,7 +7,6 @@ namespace vl::Resources {
 		hr = DirectX::LoadFromDDSFile(filename_, DirectX::DDS_FLAGS_NONE, &metadata, image);
 		if (FAILED(hr)) {
 			std::cerr << "\aFailed to load DDS file: " << std::endl;
-			return;
 		}
 
 		DirectX::CreateShaderResourceView(
@@ -27,7 +26,6 @@ namespace vl::Resources {
 		hr = DirectX::LoadFromWICFile(filename_, DirectX::WIC_FLAGS_NONE, nullptr, image);
 		if (FAILED(hr)) {
 			std::cerr << "\aFailed to load WIC file: " << std::endl;
-			return;
 		}
 
 		DirectX::CreateShaderResourceView(
