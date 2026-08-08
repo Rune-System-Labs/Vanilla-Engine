@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "Platform/Windows/vlWindow.h"
+#include "Platform/Windows/vlRenderer.h"
 #include "vlCore.h"
 #include <iostream>
 
@@ -15,12 +16,17 @@ int vl::App::Application::Run() {
     }
     core_ = std::make_unique<vl::Core>();
     core_->VlInitialize(*window_);
-    
+	renderer_ = std::make_unique<vl::Platform::Renderer>();
+
+	renderer_->InitRenderer(core_->GetDevice(), core_->GetRenderTargetView(), core_->GetContext(), core_->GetSwapChain());
+	renderer_->vlViewport(width, height);
+
    while (!glfwWindowShouldClose(window_->GetHandle())) {
        glfwPollEvents();
-           
-    }
+       
+	   renderer_->ClearScreen();
 
-   glfwTerminate();
+	   renderer_->Present();
+    }
    return 0;
 }

@@ -30,8 +30,8 @@ void Renderer::vlGenRenderState(){
 		}
 		ImGui::EndMenu();
 	}
-
-	if (ImGui::Begin("Render State Modifier",false,ImGuiWindowFlags_NoResize)) {
+	bool open = true;
+	if (ImGui::Begin("Render State Modifier",&open,ImGuiWindowFlags_NoResize)) {
 		if(Options == RenderStateOptions::Solid){
 			rasterizerDesc.FillMode = D3D11_FILL_SOLID;
 		}
@@ -46,8 +46,16 @@ void Renderer::Present(){
 	swapChain->Present(1, 0);
 }
 
+void Renderer::ClearScreen(){
+	float color[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	context->ClearRenderTargetView(rtv.Get(), color);
+}
+
 void Renderer::vlStageRenderer(){
 	device->CreateRasterizerState(&rasterizerDesc, rasterizerState.GetAddressOf());
+}
+
+Renderer::~Renderer(){
 }
 
 void Renderer::InitRenderer(ComPtr<ID3D11Device>Device,ComPtr<ID3D11RenderTargetView> Rtv, ComPtr<ID3D11DeviceContext> Context,ComPtr<IDXGISwapChain>Swapchain){

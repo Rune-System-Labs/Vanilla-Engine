@@ -17,6 +17,10 @@ namespace vl {
 		Core();
 		~Core();
 		void VlInitialize(vl::Platform::Window& window);
+		[[nodiscard]] ComPtr<ID3D11Device> GetDevice() const { return device_; }
+		[[nodiscard]] ComPtr<ID3D11DeviceContext> GetContext() const { return context_; }
+		[[nodiscard]] ComPtr<IDXGISwapChain> GetSwapChain() const { return swapChain_; }
+		[[nodiscard]] ComPtr<ID3D11RenderTargetView> GetRenderTargetView() const { return renderTargetView_; }
 	private:
 		ComPtr<ID3D11Device> device_;
 		ComPtr<ID3D11DeviceContext> context_;

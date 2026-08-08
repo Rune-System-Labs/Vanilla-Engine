@@ -2,6 +2,7 @@
 #define VL_USERINTERFACE_H
 #include <d3d11.h>
 #include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h>
 #include <memory>
 #include <wrl/client.h>
 #include <imgui.h>
@@ -18,13 +19,12 @@ namespace vl::UI {
 		UserInterface() = default;
 		~UserInterface();
 		using SettingsCallback = std::function<void()>;
-		void vlInitUI(std::unique_ptr<GLFWwindow>window, ComPtr<ID3D11Device> device, ComPtr<ID3D11DeviceContext>context);
+		void vlInitUI(std::unique_ptr<GLFWwindow>&window, ComPtr<ID3D11Device>& device, ComPtr<ID3D11DeviceContext>&context);
 		void vlStageUI();
 		void RegisterSettingsCallback(SettingsCallback callback);
 		void vlRenderUI();
 	private:
 		void vlSyncSettingsCallback();
-		bool initialized_ = false;
 		std::vector<SettingsCallback> settingsCallbacks_;
 	};
 }

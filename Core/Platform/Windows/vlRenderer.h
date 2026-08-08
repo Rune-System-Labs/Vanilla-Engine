@@ -13,15 +13,15 @@ enum RenderStateOptions {
 namespace vl::Platform {
 	class Renderer {
 	public:
-		Renderer() = default;
-		~Renderer() = default;
+		~Renderer();
 		void InitRenderer(ComPtr<ID3D11Device>Device,ComPtr<ID3D11RenderTargetView>Rtv, ComPtr<ID3D11DeviceContext>Context, ComPtr<IDXGISwapChain>Swapchain);
 		void vlViewport(const UINT width, const UINT height);
         void vlGenRenderState();
 		void Present();
+		void ClearScreen();
 		void vlStageRenderer();
 	private:
-		int Options;
+		int Options = 0;
 		D3D11_RASTERIZER_DESC rasterizerDesc = {};
 		ComPtr<ID3D11RenderTargetView>rtv;
 		ComPtr<ID3D11DeviceContext>context;

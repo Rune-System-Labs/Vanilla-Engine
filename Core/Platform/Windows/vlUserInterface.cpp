@@ -1,11 +1,10 @@
 #include "vlUserInterface.h"
 
 namespace vl::UI{
-    void UserInterface::vlInitUI(std::unique_ptr<GLFWwindow> window, ComPtr<ID3D11Device> device, ComPtr<ID3D11DeviceContext> context){
+    void UserInterface::vlInitUI(std::unique_ptr<GLFWwindow>& window, ComPtr<ID3D11Device>& device, ComPtr<ID3D11DeviceContext>& context){
     ImGui::CreateContext();
     ImGui_ImplGlfw_InitForOther(window.get(), true);
     ImGui_ImplDX11_Init(device.Get(), context.Get());
-    initialized_ = true;
     }
 
     void UserInterface::vlStageUI(){

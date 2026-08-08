@@ -4,6 +4,7 @@
 
 namespace vl::Platform {
 class Window;
+class Renderer;
 }
 
 namespace vl {
@@ -19,6 +20,7 @@ public:
 private:
     std::unique_ptr<vl::Platform::Window> window_;
 	std::unique_ptr<vl::Core> core_;
+	std::unique_ptr<vl::Platform::Renderer> renderer_;
 };
 }
 
