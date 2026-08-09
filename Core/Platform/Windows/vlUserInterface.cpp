@@ -41,10 +41,35 @@ namespace vl::UI{
 			}
 			ImGui::End();
 		}
+        
+        bool editor_open = true;
+        ImGui::Begin("Editor", &editor_open,ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar);
+        
+        for (auto& Pcallbacks : panels_) {
+            if (ImGui::CollapsingHeader(Pcallbacks.name.c_str())) {
+                Pcallbacks.draw();
+            }
+        }
+
+        ImGui::End();
+    }
+
+    void UserInterface::RegisterPanels(Editor Panels){
+        panels_.push_back(std::move(Panels));
     }
 
     void UserInterface::RegisterSettingsCallback(SettingsCallback callback){
 		settingsCallbacks_.push_back(callback);
+    }
+
+    void UserInterface::RegisterFileCallbacks(FileCallback filecallbacks){
+        FileCallbacks_.push_back(filecallbacks);
+    }
+
+    void UserInterface::vlSyncFileCallbacks(){
+        for (auto& fcallbacks : FileCallbacks_) {
+            if (fcallbacks) fcallbacks();
+        }
     }
 
     void UserInterface::vlSyncSettingsCallback(){

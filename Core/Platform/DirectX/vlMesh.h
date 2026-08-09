@@ -20,13 +20,15 @@ namespace vl::Mesh {
 	public:
 		Mesh();
 		~Mesh();
-		void vlInitMesh(ComPtr<ID3D11Device>Device_, ComPtr<ID3D11DeviceContext>context_;);
+		void vlInitMesh(ComPtr<ID3D11Device>Device_, ComPtr<ID3D11DeviceContext>context);
 		void vlDrawMesh();
 	private:
+		UINT vertexCount = 0;
 		UINT indexCount = 0;
 		std::unique_ptr<vl::Resource::Buffer>Buffer_;
 		ComPtr<ID3D11Buffer>vertexBuffer;
 		ComPtr<ID3D11Buffer>indexBuffer;
+		ComPtr<ID3D11DeviceContext>context;
 	};
 }
 

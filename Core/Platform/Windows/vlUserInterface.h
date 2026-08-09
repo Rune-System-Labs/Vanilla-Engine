@@ -13,19 +13,30 @@
 #include <vector>
 using namespace Microsoft::WRL;
 
+struct Editor {
+	std::string name;
+	std::function<void()> draw;
+};
+
 namespace vl::UI {
 	class UserInterface {
 	public:
 		UserInterface() = default;
 		~UserInterface();
 		using SettingsCallback = std::function<void()>;
+		using FileCallback = std::function<void()>;
 		void vlInitUI(GLFWwindow* window, ComPtr<ID3D11Device> device, ComPtr<ID3D11DeviceContext> context);
 		void vlStageUI();
+		void RegisterPanels(Editor Panels);
 		void RegisterSettingsCallback(SettingsCallback callback);
+		void RegisterFileCallbacks(FileCallback filecallbacks);
 		void vlRenderUI();
 	private:
+		void vlSyncFileCallbacks();
 		void vlSyncSettingsCallback();
 		std::vector<SettingsCallback> settingsCallbacks_;
+		std::vector<FileCallback>FileCallbacks_;
+		std::vector<Editor>panels_;
 		bool settingsOpen_ = false;
 		int selectedSettingsPage_ = 0;
 	};

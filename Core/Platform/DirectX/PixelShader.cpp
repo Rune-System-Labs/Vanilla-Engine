@@ -12,7 +12,7 @@ namespace vl::core::Shaders {
 	void PixelShader::CompilePixelShader(std::string_view filePath, const char* entryPoint, const char* shaderModel){
 		std::ifstream shaderFile(filePath.data());
 		if (!shaderFile.is_open()) {
-			std::cerr << "Vannila: Failed to open vertex shader file: " << filePath << std::endl;
+			std::cerr << "Vl::Failed to open vertex shader file: " << filePath << std::endl;
 			return;
 		}
 

@@ -16,13 +16,12 @@ std::cout << "VL::Buffer resources released!" << std::endl;
 }
 void InitDevice(ComPtr<ID3D11Device> deviceInstance);
 template<typename T>
-void vlGenBuffers(D3D11_USAGE Usage,std::span<T> data,UINT bindFlags, ComPtr<ID3D11Buffer>& buffers);
+void vlGenBuffers(D3D11_USAGE Usage, std::span<const T> data, UINT bindFlags, ComPtr<ID3D11Buffer>& buffers);
 private:
 ComPtr<ID3D11Device> device;
-HRESULT hr = S_OK;
 };
 template<typename T>
-inline void vl::Resource::Buffer::vlGenBuffers(D3D11_USAGE Usage, std::span<T> data, UINT bindFlags, ComPtr<ID3D11Buffer>& buffers){
+inline void vl::Resource::Buffer::vlGenBuffers(D3D11_USAGE Usage, std::span<const T> data, UINT bindFlags, ComPtr<ID3D11Buffer>& buffers){
 		D3D11_BUFFER_DESC bufferDesc = {};
 		bufferDesc.Usage = Usage;
 		bufferDesc.ByteWidth = static_cast<UINT>(data.size() * sizeof(T));
@@ -32,14 +31,15 @@ inline void vl::Resource::Buffer::vlGenBuffers(D3D11_USAGE Usage, std::span<T> d
 		bufferDesc.StructureByteStride = 0;
 		D3D11_SUBRESOURCE_DATA initData = {};
 		initData.pSysMem = data.data();
+		HRESULT result = S_OK;
 		if (initData.pSysMem == nullptr) {
-		HRESULT hr = device->CreateBuffer(&bufferDesc, nullptr, buffers.GetAddressOf());
+		result = device->CreateBuffer(&bufferDesc, nullptr, buffers.GetAddressOf());
 		}
 		else {
-			hr = device->CreateBuffer(&bufferDesc, &initData, buffers.GetAddressOf());
+		result = device->CreateBuffer(&bufferDesc, &initData, buffers.GetAddressOf());
 		}
-		if (FAILED(hr)) {
-			std::cerr << "Failed to create buffer. HRESULT: " << std::hex << hr << std::endl;
+		if (FAILED(result)) {
+			std::cerr << "Failed to create buffer. HRESULT: " << std::hex << result << std::endl;
 		}
 	}
 }

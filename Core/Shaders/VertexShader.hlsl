@@ -8,13 +8,13 @@ cbuffer TransformBuffer : register(b0)
 struct vertex_in
 {
     float3 position : POSITION;
-    float3 TexCoord : TEXCOORD0;
+    float2 TexCoord : TEXCOORD0;
 };
 
 struct vertex_out
 {
     float4 position : SV_POSITION;
-    float3 TexCoord : TEXCOORD0;
+    float2 TexCoord : TEXCOORD0;
 };
 
 vertex_out VSMain(vertex_in input)
